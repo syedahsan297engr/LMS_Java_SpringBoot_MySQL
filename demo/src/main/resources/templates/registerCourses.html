@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+
+    <title>Students Directory</title>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h3>Students Directory</h3>
+    <hr>
+
+    <!-- Add a button -->
+    <a th:href="@{/students/viewCourses}"
+       class="btn btn-primary btn-sm mb-3">
+        Back To Courses
+    </a>
+
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+        <tr>
+            <th>Course Id</th>
+            <th>Course Name</th>
+            <th>Instructor Name</th>
+            <th>Mail</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="tempCourse : ${courses}">
+            <td th:text="${tempCourse.courseId}">Course ID</td>
+            <td th:text="${tempCourse.courseName}">Course Name</td>
+            <td th:text="${tempCourse.instructorName}">Instructor Name</td>
+            <td th:text="${tempCourse.mail}">Instructor Mail</td>
+<!--            <td th:text="${tempCourse.instructorName">Instructor Name</td>-->
+<!--            You have to navigate inside the template bcz of that relationship that you've defined in that entity classes -->
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+
+</body>
+</html>
+
+
+

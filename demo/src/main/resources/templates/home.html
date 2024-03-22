@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <title>Welcome to LMS Demo</title>
+</head>
+
+<body>
+<h2>LMS System Using Spring, Spring Security, Hibernate/JPA, ThymeLeaf</h2>
+<hr>
+
+<p>
+Welcome!
+</p>
+
+<hr>
+
+<!-- display user name and role(s) -->
+
+<p>
+    User: <span sec:authentication="principal.username"></span>
+    <br><br>
+    Role(s): <span sec:authentication="principal.authorities"></span>
+</p>
+
+<div sec:authorize="hasRole('EMPLOYEE')">
+    <!--    Employee refers to the student here-->
+    <!-- Add a link to point to /systems ... this is for the admins -->
+
+    <p>
+        <a th:href="@{/students/viewCourses}">See Your Courses Details</a>
+        (Only for Students)
+    </p>
+    <p>
+        <a th:href="@{/students/registerCourses}">Register New Courses</a>
+        (Only for Students)
+    </p>
+    <p>
+        <a th:href="@{/students/customQueryResult}">Checking Custom Queries</a>
+        (Only for Ahsan)
+    </p>
+
+</div>
+
+<div sec:authorize="hasRole('MANAGER')">
+<!--It is parent-->
+    <!-- Add a link to point to /leaders ... this is for the managers -->
+    <p>
+        <a th:href="@{/parents/leaders}">See your son/daughter Progress</a>
+        (Only for Parents)
+    </p>
+
+</div>
+
+<div sec:authorize="hasRole('ADMIN')">
+
+    <!-- Add a link to point to /systems ... this is for the admins -->
+
+    <p>
+        <a th:href="@{/admin/systems}">Get Your Courses Details</a>
+        (Only for Instructors)
+    </p>
+
+    <p>
+        <a th:href="@{/admin/updateGrades}">Give Grades</a>
+        (Only for Instructors)
+    </p>
+
+    <p>
+        <a th:href="@{/admin/offerCourse}">Offer New Course</a>
+        (Only for Instructors)
+    </p>
+
+</div>
+
+<hr>
+
+<!-- Add a logout button -->
+<form action="#" th:action="@{/logout}"
+      method="POST">
+
+    <input type="submit" value="Logout" class="btn btn-outline-primary mt-2" />
+
+</form>
+
+
+</body>
+
+</html>
